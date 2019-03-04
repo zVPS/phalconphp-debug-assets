@@ -1,0 +1,13 @@
+{
+    "name": "zVPS/phalconphp-debug-assets",
+    "description": "Localised debug page assets for PhalconPHP.",
+    "authors": [
+        {
+            "name": "Kevin Andrews",
+            "email": "kevin@zvps.uk"
+        }
+    ],
+    "require": {
+        "slowprog/composer-copy-file": "~0.3"
+    }
+}
