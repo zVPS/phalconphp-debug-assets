@@ -27,7 +27,6 @@ Example composer file:
     "require" : {
         "php" : ">=7.2",
         "ext-phalcon" : "^3.4",
-        "zvps/phalcon-validation" : "dev-master",
         "fabfuel/prophiler": "~1.5",
         "phalcon/incubator": "3.4.x"
     },
@@ -60,3 +59,21 @@ Example composer file:
 ```
 
 If your project has a different location for assets / webroot then change `public/debug/` to the correct path relative to the project root.
+
+## Setup
+
+It would be recommended to only load these files and setup the debug class for development environments. Our front controller looks a bit like this:
+
+```
+    $config = new ConfigIni(APP_DIR . '/config/app.ini');
+    if (!$config instanceof ConfigIni) {
+        throw new \Exception("Config file app.ini missing or unable to be loaded.");
+    }
+
+    /** start composer autoloader */
+    require_once ( APP_DIR . $config->application->vendorDir . '/autoload.php' );
+
+    ($config->application->debug) ? (new \Phalcon\Debug())->listen(true, true)->setUri('/debug/') : false;
+```
+
+Only setting up the `/debug/` folder for environments set to show exceptions and debug pages.
